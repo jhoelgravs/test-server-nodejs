@@ -1,5 +1,6 @@
 const express = require("express");
 const postgres = require("pg");
+require("dotenv").config();
 
 const app = express();
 
@@ -15,4 +16,10 @@ postgresClient
   .then(() => console.log("conectado a postgres"))
   .catch(() => console.error("error al conectarse"));
 
-app.listen(8080, () => console.log(`Listo por el puerto 8080`));
+app.get("/", (req, res) => {
+  res.send("Hola, mundo");
+});
+
+app.listen(process.env.SERVER_PORT, () =>
+  console.log(`Listo por el puerto ${process.env.SERVER_PORT}`)
+);
